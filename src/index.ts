@@ -4,7 +4,9 @@ import { htmlTable } from '$utils/htmlTable';
 
 window.Webflow ||= [];
 window.Webflow.push(() => {
-  addStamps();
-  splideImagesOrder();
-  htmlTable();
+  document.addEventListener('DOMContentLoaded', function () {
+    addStamps();
+    splideImagesOrder();
+    htmlTable();
+  });
 });
