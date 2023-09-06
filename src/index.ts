@@ -4,9 +4,10 @@ import { htmlTable } from '$utils/htmlTable';
 
 window.Webflow ||= [];
 window.Webflow.push(() => {
-  document.addEventListener('DOMContentLoaded', function () {
-    addStamps();
-    splideImagesOrder();
-    htmlTable();
-  });
+  //console.log('hello');
+  //document.addEventListener('DOMContentLoaded', function () {
+  addStamps();
+  splideImagesOrder();
+  htmlTable();
+  //});
 });

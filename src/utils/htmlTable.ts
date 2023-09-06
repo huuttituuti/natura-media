@@ -38,7 +38,18 @@ export function htmlTable() {
     const amountOfColumns = tblHead.querySelectorAll('td').length;
 
     /* INGREDIENTS */
-    const lines = content.querySelectorAll('p:not(:has(strong))');
+    /* For some reason this line doesn't work in Firefox but does in Chrome:
+    const filterLines = content.querySelectorAll('p:not(:has(strong))'); */
+    const lines = [];
+    // Get all the paragraphs that are not bolded
+    const filterLines = content.querySelectorAll('p');
+    for (let i = 0; i < filterLines.length; i++) {
+      if (!filterLines[i].innerHTML.includes('<strong>')) {
+        //console.log(filterLines[i]);
+        lines.push(filterLines[i]);
+      }
+    }
+
     const linesArray = [];
 
     for (let i = 0; i < lines.length; i++) {
