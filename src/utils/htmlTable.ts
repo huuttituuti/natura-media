@@ -45,7 +45,6 @@ export function htmlTable() {
     const filterLines = content.querySelectorAll('p');
     for (let i = 0; i < filterLines.length; i++) {
       if (!filterLines[i].innerHTML.includes('<strong>')) {
-        //console.log(filterLines[i]);
         lines.push(filterLines[i]);
       }
     }
