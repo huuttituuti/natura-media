@@ -1,5 +1,4 @@
 export function allergens() {
-  const allergensWrp = document.querySelector("[allergens='wrp']");
   const allergensH = document.querySelector("[allergens='header']");
   const allergens = Array.from(document.querySelectorAll("[allergens='item']"));
   const finalArray = [];

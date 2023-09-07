@@ -1,1 +1,238 @@
-"use strict";(()=>{function H(){var a,e;let o=document.querySelectorAll("[stamp='item']"),t=document.querySelectorAll("[stamp='card']"),n=[];for(let u=0;u<o.length;u++){let l=(a=o[u].querySelector("[stamp='type']"))==null?void 0:a.textContent,d=o[u].querySelector("[stamp='image']"),S=o[u].querySelectorAll("[stamp='product']"),h=(e=document.querySelector("[stamp='name']"))==null?void 0:e.textContent;n=Array.from(S).map(r=>r.textContent);for(let r=0;r<t.length;r++)n.some(L=>{h!=null&&h.includes(L)&&(l!=null&&l.includes("Suosittelee")?(t[r].append(d==null?void 0:d.cloneNode(!0)),t[r].setAttribute("fs-cmssort-field","ajankohtaiset")):l!=null&&l.includes("Uutuus")&&(d==null||d.classList.add("uutuus"),t[r].append(d==null?void 0:d.cloneNode(!0)),t[r].setAttribute("fs-cmssort-field","ajankohtaiset")))})}let i=document.querySelector("[stamp='list-wrp']");i==null||i.remove()}function w(){var u;let o=document.querySelector("[allergens='wrp']"),t=document.querySelector("[allergens='header']"),n=Array.from(document.querySelectorAll("[allergens='item']")),i=[],a=[],e=[];for(let l=0;l<n.length;l++)n[l].innerHTML.includes("Vegaani-leima")||e.push(n[l].textContent);for(let l=0;l<e.length;l++)e[l].includes("Vegaani-leima")&&e.splice(e.indexOf(e[l]),1);if(e.join(""),e.length===1)e[0]=" "+e[0]+".",t.textContent="Ei sis\xE4ll\xE4 "+e[0];else if(e.length===2)e[0]=" "+e[0]+" eik\xE4 ",e[1]+=".",t.textContent="Ei sis\xE4ll\xE4 "+e[0]+e[1];else if(e.length>=3){let l=" "+e[0]+", ",d=e[e.length-1]+".",S=e[e.length-2]+" eik\xE4 ",h=e.slice(1,e.length-2);for(let r=0;r<h.length;r++)h[r]=h[r]+", ";i.push(l,h,S,d),a=i.flat(),a=a.join(""),t.textContent="Ei sis\xE4ll\xE4 "+a}(u=document.querySelector("[allergens='list']"))==null||u.remove()}function M(){let o=document.querySelector("[html-table='content']");if(o.textContent){let t=o.querySelector("strong").textContent,n=document.querySelector("[html-table='container"),i=document.createElement("table");i.classList.add("table"),n==null||n.appendChild(i);let a=i.createTHead();a.classList.add("table_thead");let e=i.createTBody(),u=Array.from(t.split("|")),l=a.insertRow(0),d=u[0];l.insertCell(0).innerHTML=d;let S=u.slice(1,-1);for(let s=0;s<S.length;s++){let m=l.insertCell();m.innerHTML=S[s],m.style.paddingLeft=".25rem",m.style.paddingRight=".25rem",m.style.textAlign="center"}let h=u.slice(-1),r=l.insertCell(-1);r.innerHTML=h,r.style.textAlign="right",r.style.paddingRight="1rem";let L=a.querySelectorAll("td").length,C=[],T=o.querySelectorAll("p");for(let s=0;s<T.length;s++)T[s].innerHTML.includes("<strong>")||C.push(T[s]);let q=[];for(let s=0;s<C.length;s++){let m=e.insertRow(),g=C[s].textContent;if(g[0]==="*")q.push(C[s]);else{let c=Array.from(g.split("|")),f=c[0],y=m.insertCell(0);y.innerHTML=f,y.style.paddingRight=".25rem";let x=c.slice(1);for(let b=0;b<x.length;b++){let p=m.insertCell();p.innerHTML=x[b],p.style.paddingLeft=".25rem",p.style.paddingRight=".25rem",L===2||x[b].includes("%")?(p.style.textAlign="right",p.style.paddingRight="1rem"):p.style.textAlign="center"}}let A=document.querySelectorAll("td");for(let c=0;c<A.length;c++)A[c].textContent[0]==="-"&&A[c].classList.add("padThisCell");if(C[s].innerHTML.includes("<em>")){let c=C[s].querySelector("em").textContent,f=e.querySelectorAll("td");for(let y=0;y<f.length;y++)f[y].innerHTML.includes(c)&&(f[y].innerHTML=f[y].innerHTML.replace(c,`<em>${c}</em>`))}o.style.display="none"}if(q.length>0){for(let g=0;g<q.length;g++){let A=q[g].textContent,c=e.insertRow();if(A[1]==="%"){let f=c.insertCell(0);f.innerHTML=A,f.colSpan=100}else{let f=A.slice(1),y=c.insertCell(0);y.innerHTML=f,y.colSpan=100}}let s=q[0].textContent.slice(1),m=e.querySelectorAll("tr");for(let g=0;g<m.length;g++)m[g].innerHTML.includes(s)&&m[g].classList.add("table_first-footnote")}}}function R(){let o=document.querySelector("[gallery='main-image']"),t=document.querySelector("[gallery='list']"),n=document.querySelector("[gallery='info-card']"),i=document.querySelector("[gallery='list-wrp']"),a=document.querySelector("[gallery='desktop']"),e;n.getAttribute("gallery-location")&&(e=Number(n.getAttribute("gallery-location"))-1),t.childElementCount===0?(i.remove(),n.getAttribute("gallery-location")?t.insertBefore(n,t.children[e]):n.insertAdjacentElement("afterend",o)):t.childElementCount===1?(t!=null&&t.querySelectorAll("invisible")&&i.remove(),n.getAttribute("gallery-location")?t.insertBefore(n,t.children[e]):a.insertBefore(o,t.children[1])):t.childElementCount>1&&(t.insertBefore(o,t.children[1]),n.getAttribute("gallery-location")?(t.insertBefore(n,t.children[e]),t.insertBefore(o,t.children[1])):t.insertBefore(n,t.children[3]))}window.Webflow||(window.Webflow=[]);window.Webflow.push(()=>{H(),R(),M(),w()});})();
+"use strict";
+(() => {
+  // bin/live-reload.js
+  new EventSource(`${"http://localhost:3000"}/esbuild`).addEventListener("change", () => location.reload());
+
+  // src/utils/addStamps.ts
+  function addStamps() {
+    const stampItems = document.querySelectorAll("[stamp='item']");
+    const cards = document.querySelectorAll("[stamp='card']");
+    let productsArray = [];
+    for (let i = 0; i < stampItems.length; i++) {
+      const type = stampItems[i].querySelector("[stamp='type']")?.textContent;
+      const image = stampItems[i].querySelector("[stamp='image']");
+      const products = stampItems[i].querySelectorAll("[stamp='product']");
+      const cardProductName = document.querySelector("[stamp='name']")?.textContent;
+      productsArray = Array.from(products).map((x) => x.textContent);
+      for (let c = 0; c < cards.length; c++) {
+        productsArray.some((el) => {
+          if (cardProductName?.includes(el)) {
+            if (type?.includes("Suosittelee")) {
+              cards[c].append(image?.cloneNode(true));
+              cards[c].setAttribute("fs-cmssort-field", "ajankohtaiset");
+            } else if (type?.includes("Uutuus")) {
+              image?.classList.add("uutuus");
+              cards[c].append(image?.cloneNode(true));
+              cards[c].setAttribute("fs-cmssort-field", "ajankohtaiset");
+            }
+          }
+        });
+      }
+    }
+    const stampList = document.querySelector("[stamp='list-wrp']");
+    stampList?.remove();
+  }
+
+  // src/utils/allergens.ts
+  function allergens() {
+    const allergensH = document.querySelector("[allergens='header']");
+    const allergens2 = Array.from(document.querySelectorAll("[allergens='item']"));
+    const finalArray = [];
+    let string = [];
+    const array = [];
+    for (let i = 0; i < allergens2.length; i++) {
+      if (!allergens2[i].innerHTML.includes("Vegaani-leima")) {
+        array.push(allergens2[i].textContent);
+      }
+    }
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].includes("Vegaani-leima")) {
+        array.splice(array.indexOf(array[i]), 1);
+      }
+    }
+    array.join("");
+    if (array.length === 1) {
+      array[0] = " " + array[0] + ".";
+      allergensH.textContent = "Ei sis\xE4ll\xE4 " + array[0];
+    } else if (array.length === 2) {
+      array[0] = " " + array[0] + " eik\xE4 ";
+      array[1] += ".";
+      allergensH.textContent = "Ei sis\xE4ll\xE4 " + array[0] + array[1];
+    } else if (array.length >= 3) {
+      const first = " " + array[0] + ", ";
+      const last = array[array.length - 1] + ".";
+      const secondlast = array[array.length - 2] + " eik\xE4 ";
+      const others = array.slice(1, array.length - 2);
+      for (let i = 0; i < others.length; i++) {
+        others[i] = others[i] + ", ";
+      }
+      finalArray.push(first, others, secondlast, last);
+      string = finalArray.flat();
+      string = string.join("");
+      allergensH.textContent = "Ei sis\xE4ll\xE4 " + string;
+    }
+    document.querySelector("[allergens='list']")?.remove();
+  }
+
+  // src/utils/htmlTable.ts
+  function htmlTable() {
+    const content = document.querySelector("[html-table='content']");
+    if (content.textContent) {
+      const headers = content.querySelector("strong").textContent;
+      const container = document.querySelector("[html-table='container");
+      const tbl = document.createElement("table");
+      tbl.classList.add("table");
+      container?.appendChild(tbl);
+      const tblHead = tbl.createTHead();
+      tblHead.classList.add("table_thead");
+      const tblBody = tbl.createTBody();
+      const headersArray = Array.from(headers.split("|"));
+      const head = tblHead.insertRow(0);
+      const first = headersArray[0];
+      head.insertCell(0).innerHTML = first;
+      const middle = headersArray.slice(1, -1);
+      for (let i = 0; i < middle.length; i++) {
+        const cell2 = head.insertCell();
+        cell2.innerHTML = middle[i];
+        cell2.style.paddingLeft = ".25rem";
+        cell2.style.paddingRight = ".25rem";
+        cell2.style.textAlign = "center";
+      }
+      const last = headersArray.slice(-1);
+      const cell = head.insertCell(-1);
+      cell.innerHTML = last;
+      cell.style.textAlign = "right";
+      cell.style.paddingRight = "1rem";
+      const amountOfColumns = tblHead.querySelectorAll("td").length;
+      const lines = [];
+      const filterLines = content.querySelectorAll("p");
+      for (let i = 0; i < filterLines.length; i++) {
+        if (!filterLines[i].innerHTML.includes("<strong>")) {
+          lines.push(filterLines[i]);
+        }
+      }
+      const linesArray = [];
+      for (let i = 0; i < lines.length; i++) {
+        const row = tblBody.insertRow();
+        const line = lines[i].textContent;
+        if (line[0] === "*") {
+          linesArray.push(lines[i]);
+        } else {
+          const ingrArray = Array.from(line.split("|"));
+          const first2 = ingrArray[0];
+          const firstRow = row.insertCell(0);
+          firstRow.innerHTML = first2;
+          firstRow.style.paddingRight = ".25rem";
+          const others = ingrArray.slice(1);
+          for (let i2 = 0; i2 < others.length; i2++) {
+            const otherRows = row.insertCell();
+            otherRows.innerHTML = others[i2];
+            otherRows.style.paddingLeft = ".25rem";
+            otherRows.style.paddingRight = ".25rem";
+            if (amountOfColumns === 2) {
+              otherRows.style.textAlign = "right";
+              otherRows.style.paddingRight = "1rem";
+            } else if (others[i2].includes("%")) {
+              otherRows.style.textAlign = "right";
+              otherRows.style.paddingRight = "1rem";
+            } else {
+              otherRows.style.textAlign = "center";
+            }
+          }
+        }
+        const tds = document.querySelectorAll("td");
+        for (let i2 = 0; i2 < tds.length; i2++) {
+          const tdsText = tds[i2].textContent;
+          if (tdsText[0] === "-") {
+            tds[i2].classList.add("padThisCell");
+          }
+        }
+        if (lines[i].innerHTML.includes("<em>")) {
+          const italics = lines[i].querySelector("em").textContent;
+          const toBeItalics = tblBody.querySelectorAll("td");
+          for (let i2 = 0; i2 < toBeItalics.length; i2++) {
+            const it = toBeItalics[i2].innerHTML;
+            if (it.includes(italics)) {
+              toBeItalics[i2].innerHTML = toBeItalics[i2].innerHTML.replace(
+                italics,
+                `<em>${italics}</em>`
+              );
+            }
+          }
+        }
+        content.style.display = "none";
+      }
+      if (linesArray.length > 0) {
+        for (let i = 0; i < linesArray.length; i++) {
+          const line = linesArray[i].textContent;
+          const row = tblBody.insertRow();
+          if (line[1] === "%") {
+            const cell2 = row.insertCell(0);
+            cell2.innerHTML = line;
+            cell2.colSpan = 100;
+          } else {
+            const starRemoved = line.slice(1);
+            const cell2 = row.insertCell(0);
+            cell2.innerHTML = starRemoved;
+            cell2.colSpan = 100;
+          }
+        }
+        const firstLine = linesArray[0].textContent.slice(1);
+        const trs = tblBody.querySelectorAll("tr");
+        for (let i = 0; i < trs.length; i++) {
+          if (trs[i].innerHTML.includes(firstLine)) {
+            trs[i].classList.add("table_first-footnote");
+          }
+        }
+      }
+    }
+  }
+
+  // src/utils/splideImagesOrder.ts
+  function splideImagesOrder() {
+    const mainImage = document.querySelector("[gallery='main-image']");
+    const list = document.querySelector("[gallery='list']");
+    const infoCard = document.querySelector("[gallery='info-card']");
+    const listWrp = document.querySelector("[gallery='list-wrp']");
+    const galleryDesktop = document.querySelector("[gallery='desktop']");
+    let infoCardPosition;
+    if (infoCard.getAttribute("gallery-location")) {
+      infoCardPosition = Number(infoCard.getAttribute("gallery-location")) - 1;
+    }
+    if (list.childElementCount === 0) {
+      listWrp.remove();
+      if (!infoCard.getAttribute("gallery-location")) {
+        infoCard.insertAdjacentElement("afterend", mainImage);
+      } else {
+        list.insertBefore(infoCard, list.children[infoCardPosition]);
+      }
+    } else if (list.childElementCount === 1) {
+      if (list?.querySelectorAll("invisible")) {
+        listWrp.remove();
+      }
+      if (!infoCard.getAttribute("gallery-location")) {
+        galleryDesktop.insertBefore(mainImage, list.children[1]);
+      } else {
+        list.insertBefore(infoCard, list.children[infoCardPosition]);
+      }
+    } else if (list.childElementCount > 1) {
+      list.insertBefore(mainImage, list.children[1]);
+      if (!infoCard.getAttribute("gallery-location")) {
+        list.insertBefore(infoCard, list.children[3]);
+      } else {
+        list.insertBefore(infoCard, list.children[infoCardPosition]);
+        list.insertBefore(mainImage, list.children[1]);
+      }
+    }
+  }
+
+  // src/index.ts
+  window.Webflow ||= [];
+  window.Webflow.push(() => {
+    addStamps();
+    splideImagesOrder();
+    htmlTable();
+    allergens();
+  });
+})();
+//# sourceMappingURL=index.js.map
