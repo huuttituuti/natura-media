@@ -1,5 +1,11 @@
 # @finsweet/developer-starter
 
+## 0.2.0
+
+### Minor Changes
+
+- 81591a5: addStamps fixed
+
 ## 0.1.0
 
 ### Minor Changes
