@@ -97,8 +97,14 @@ export function htmlTable() {
         }
       } // for tds
 
-      // If contains <em>, add italics back
+      // If contains "^", run function exponent()
+      if (lines[i].textContent?.includes('^')) {
+        exponent();
+      }
+
+      // If contains <em>
       if (lines[i].innerHTML.includes('<em>')) {
+        // Add italics back
         const italics = lines[i].querySelector('em').textContent;
         const toBeItalics = tblBody.querySelectorAll('td');
         for (let i = 0; i < toBeItalics.length; i++) {
@@ -111,9 +117,28 @@ export function htmlTable() {
           }
         } // for toBeItalics
       }
-
       // Hide original content
       content.style.display = 'none';
+    }
+
+    // Exponent marking
+    function exponent() {
+      const exponents = document.querySelectorAll('td');
+      for (let i = 0; i < exponents.length; i++) {
+        if (exponents[i].textContent?.includes('^')) {
+          const number = exponents[i].textContent.substring(
+            exponents[i].textContent.indexOf('^'),
+            exponents[i].textContent.length - 1 + 1
+          );
+          // Remove orig text
+          exponents[i].textContent = exponents[i].textContent?.replace(number, '');
+          // Add text again but in span
+          const span = document.createElement('sup');
+          span.textContent = number.replace('^', '');
+          span.classList.add('exponent');
+          exponents[i].appendChild(span);
+        }
+      }
     }
 
     /* FOOTNOTES */
