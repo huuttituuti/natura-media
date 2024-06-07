@@ -9,5 +9,8 @@ window.Webflow.push(() => {
   addStamps();
   splideImagesOrder();
   htmlTable();
-  allergens();
+  //allergens();
+  // Allergens revamp (using icons):
+  const veganStamp = document.querySelector("[allergen-name='Vegaaninen']");
+  veganStamp?.remove();
 });
