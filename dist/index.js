@@ -1,1 +1,281 @@
-"use strict";(()=>{function R(){var a;let o=document.querySelectorAll("[stamp='item']"),t=document.querySelectorAll("[stamp='card']"),r=[],m=[];for(let l=0;l<o.length;l++){let g=(a=o[l].querySelector("[stamp='type']"))==null?void 0:a.textContent,d=o[l].querySelector("[stamp='image']"),y=o[l].querySelectorAll("[stamp='product']"),C=document.querySelectorAll("[stamp='name']");for(let h=0;h<C.length;h++)m.push(C[h].textContent);r=Array.from(y).map(h=>h.textContent),r.some(h=>{if(m!=null&&m.includes(h)){for(let x=0;x<t.length;x++)if(t[x].innerHTML.includes(h)){let A=t[x].parentElement,b=A==null?void 0:A.parentElement;b==null||b.prepend(A),g!=null&&g.includes("Suosittelee")?(t[x].append(d==null?void 0:d.cloneNode(!0)),t[x].setAttribute("fs-cmssort-field","ajankohtaiset")):g!=null&&g.includes("Uutuus")&&(d==null||d.classList.add("uutuus"),t[x].append(d==null?void 0:d.cloneNode(!0)),t[x].setAttribute("fs-cmssort-field","ajankohtaiset"))}}})}let e=document.querySelector("[stamp='list-wrp']");e==null||e.remove()}function E(){var a;let o=document.querySelector("[allergens='header']"),t=Array.from(document.querySelectorAll("[allergens='item']")),r=[],m=[],e=[];for(let l=0;l<t.length;l++)t[l].innerHTML.includes("Vegaani-leima")||e.push(t[l].textContent);for(let l=0;l<e.length;l++)e[l].includes("Vegaani-leima")&&e.splice(e.indexOf(e[l]),1);if(e.join(""),e.length===1)e[0]=" "+e[0]+".",o.textContent="Ei sis\xE4ll\xE4 "+e[0];else if(e.length===2)e[0]=" "+e[0]+" eik\xE4 ",e[1]+=".",o.textContent="Ei sis\xE4ll\xE4 "+e[0]+e[1];else if(e.length>=3){let l=" "+e[0]+", ",g=e[e.length-1]+".",d=e[e.length-2]+" eik\xE4 ",y=e.slice(1,e.length-2);for(let C=0;C<y.length;C++)y[C]=y[C]+", ";r.push(l,y,d,g),m=r.flat(),m=m.join(""),o.textContent="Ei sis\xE4ll\xE4 "+m}(a=document.querySelector("[allergens='list']"))==null||a.remove()}function B(){var r;let o=document.querySelector("[html-table='content']");if(o.textContent){let M=function(){var u,f;let n=document.querySelectorAll("td");for(let s=0;s<n.length;s++)if((u=n[s].textContent)!=null&&u.includes("^")){let i=n[s].textContent.substring(n[s].textContent.indexOf("^"),n[s].textContent.length-1+1);n[s].textContent=(f=n[s].textContent)==null?void 0:f.replace(i,"");let c=document.createElement("sup");c.textContent=i.replace("^",""),c.classList.add("exponent"),n[s].appendChild(c)}};var t=M;let m=o.querySelector("strong").textContent,e=document.querySelector("[html-table='container"),a=document.createElement("table");a.classList.add("table"),e==null||e.appendChild(a);let l=a.createTHead();l.classList.add("table_thead");let g=a.createTBody(),d=Array.from(m.split("|")),y=l.insertRow(0),C=d[0];y.insertCell(0).innerHTML=C;let h=d.slice(1,-1);for(let n=0;n<h.length;n++){let u=y.insertCell();u.innerHTML=h[n],u.style.paddingLeft=".25rem",u.style.paddingRight=".25rem",u.style.textAlign="center"}let x=d.slice(-1),A=y.insertCell(-1);A.innerHTML=x,A.style.textAlign="right",A.style.paddingRight="1rem";let b=l.querySelectorAll("td").length,q=[],w=o.querySelectorAll("p");for(let n=0;n<w.length;n++)w[n].innerHTML.includes("<strong>")||q.push(w[n]);let L=[];for(let n=0;n<q.length;n++){let u=g.insertRow(),f=q[n].textContent;if(f[0]==="*")L.push(q[n]);else{let i=Array.from(f.split("|")),c=i[0],p=u.insertCell(0);p.innerHTML=c,p.style.paddingRight=".25rem";let T=i.slice(1);for(let H=0;H<T.length;H++){let S=u.insertCell();S.innerHTML=T[H],S.style.paddingLeft=".25rem",S.style.paddingRight=".25rem",b===2||T[H].includes("%")?(S.style.textAlign="right",S.style.paddingRight="1rem"):S.style.textAlign="center"}}let s=document.querySelectorAll("td");for(let i=0;i<s.length;i++)s[i].textContent[0]==="-"&&s[i].classList.add("padThisCell");if((r=q[n].textContent)!=null&&r.includes("^")&&M(),q[n].innerHTML.includes("<em>")){let i=q[n].querySelector("em").textContent,c=g.querySelectorAll("td");for(let p=0;p<c.length;p++)c[p].innerHTML.includes(i)&&(c[p].innerHTML=c[p].innerHTML.replace(i,`<em>${i}</em>`))}o.style.display="none"}if(L.length>0){for(let f=0;f<L.length;f++){let s=L[f].textContent,i=g.insertRow();if(s[1]==="%"){let c=i.insertCell(0);c.innerHTML=s,c.colSpan=100}else{let c=s.slice(1),p=i.insertCell(0);p.innerHTML=c,p.colSpan=100}}let n=L[0].textContent.slice(1),u=g.querySelectorAll("tr");for(let f=0;f<u.length;f++)u[f].innerHTML.includes(n)&&u[f].classList.add("table_first-footnote")}}}function k(){let o=document.querySelector("[gallery='main-image']"),t=document.querySelector("[gallery='list']"),r=document.querySelector("[gallery='info-card']"),m=document.querySelector("[gallery='list-wrp']"),e=document.querySelector("[gallery='desktop']"),a;r.getAttribute("gallery-location")&&(a=Number(r.getAttribute("gallery-location"))-1),t.childElementCount===0?(m.remove(),r.getAttribute("gallery-location")?t.insertBefore(r,t.children[a]):r.insertAdjacentElement("afterend",o)):t.childElementCount===1?r.getAttribute("gallery-location")?t.insertBefore(r,t.children[a]):e.insertBefore(o,t.children[1]):t.childElementCount>1&&(t.insertBefore(o,t.children[1]),r.getAttribute("gallery-location")?(t.insertBefore(r,t.children[a]),t.insertBefore(o,t.children[1])):t.insertBefore(r,t.children[3]))}window.Webflow||(window.Webflow=[]);window.Webflow.push(()=>{document.querySelector("[swiper='index-hero']")||(R(),k(),B(),E())});})();
+"use strict";
+(() => {
+  // bin/live-reload.js
+  new EventSource(`${"http://localhost:3000"}/esbuild`).addEventListener("change", () => location.reload());
+
+  // src/utils/addStamps.ts
+  function addStamps() {
+    const stampItems = document.querySelectorAll("[stamp='item']");
+    const cards = document.querySelectorAll("[stamp='card']");
+    let productsArray = [];
+    const cardProductNameArray = [];
+    for (let i = 0; i < stampItems.length; i++) {
+      const type = stampItems[i].querySelector("[stamp='type']")?.textContent;
+      const image = stampItems[i].querySelector("[stamp='image']");
+      const products = stampItems[i].querySelectorAll("[stamp='product']");
+      const cardProductName = document.querySelectorAll("[stamp='name']");
+      for (let i2 = 0; i2 < cardProductName.length; i2++) {
+        cardProductNameArray.push(cardProductName[i2].textContent);
+      }
+      productsArray = Array.from(products).map((x) => x.textContent);
+      productsArray.some((el) => {
+        if (cardProductNameArray?.includes(el)) {
+          for (let i2 = 0; i2 < cards.length; i2++) {
+            if (cards[i2].innerHTML.includes(el)) {
+              const cmsItem = cards[i2].parentElement;
+              const parentList = cmsItem?.parentElement;
+              parentList?.prepend(cmsItem);
+              if (type?.includes("Suosittelee")) {
+                cards[i2].append(image?.cloneNode(true));
+                cards[i2].setAttribute("fs-cmssort-field", "ajankohtaiset");
+              } else if (type?.includes("Uutuus")) {
+                image?.classList.add("uutuus");
+                cards[i2].append(image?.cloneNode(true));
+                cards[i2].setAttribute("fs-cmssort-field", "ajankohtaiset");
+              }
+            }
+          }
+        }
+      });
+    }
+    const stampList = document.querySelector("[stamp='list-wrp']");
+    stampList?.remove();
+  }
+
+  // src/utils/allergens.ts
+  function allergens() {
+    const allergensH = document.querySelector("[allergens='header']");
+    const allergens2 = Array.from(document.querySelectorAll("[allergens='item']"));
+    const finalArray = [];
+    let string = [];
+    const array = [];
+    for (let i = 0; i < allergens2.length; i++) {
+      if (!allergens2[i].innerHTML.includes("Vegaani-leima")) {
+        array.push(allergens2[i].textContent);
+      }
+    }
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].includes("Vegaani-leima")) {
+        array.splice(array.indexOf(array[i]), 1);
+      }
+    }
+    array.join("");
+    if (array.length === 1) {
+      array[0] = " " + array[0] + ".";
+      allergensH.textContent = "Ei sis\xE4ll\xE4 " + array[0];
+    } else if (array.length === 2) {
+      array[0] = " " + array[0] + " eik\xE4 ";
+      array[1] += ".";
+      allergensH.textContent = "Ei sis\xE4ll\xE4 " + array[0] + array[1];
+    } else if (array.length >= 3) {
+      const first = " " + array[0] + ", ";
+      const last = array[array.length - 1] + ".";
+      const secondlast = array[array.length - 2] + " eik\xE4 ";
+      const others = array.slice(1, array.length - 2);
+      for (let i = 0; i < others.length; i++) {
+        others[i] = others[i] + ", ";
+      }
+      finalArray.push(first, others, secondlast, last);
+      string = finalArray.flat();
+      string = string.join("");
+      allergensH.textContent = "Ei sis\xE4ll\xE4 " + string;
+    }
+    document.querySelector("[allergens='list']")?.remove();
+  }
+
+  // src/utils/htmlTable.ts
+  function htmlTable() {
+    const content = document.querySelector("[html-table='content']");
+    if (content.textContent) {
+      let exponent2 = function() {
+        const exponents = document.querySelectorAll("td");
+        for (let i = 0; i < exponents.length; i++) {
+          if (exponents[i].textContent?.includes("^")) {
+            const number = exponents[i].textContent.substring(
+              exponents[i].textContent.indexOf("^"),
+              exponents[i].textContent.length - 1 + 1
+            );
+            exponents[i].textContent = exponents[i].textContent?.replace(number, "");
+            const span = document.createElement("sup");
+            span.textContent = number.replace("^", "");
+            span.classList.add("exponent");
+            exponents[i].appendChild(span);
+          }
+        }
+      };
+      var exponent = exponent2;
+      const headers = content.querySelector("strong").textContent;
+      const container = document.querySelector("[html-table='container");
+      const tbl = document.createElement("table");
+      tbl.classList.add("table");
+      container?.appendChild(tbl);
+      const tblHead = tbl.createTHead();
+      tblHead.classList.add("table_thead");
+      const tblBody = tbl.createTBody();
+      const headersArray = Array.from(headers.split("|"));
+      const head = tblHead.insertRow(0);
+      const first = headersArray[0];
+      head.insertCell(0).innerHTML = first;
+      const middle = headersArray.slice(1, -1);
+      for (let i = 0; i < middle.length; i++) {
+        const cell2 = head.insertCell();
+        cell2.innerHTML = middle[i];
+        cell2.style.paddingLeft = ".25rem";
+        cell2.style.paddingRight = ".25rem";
+        cell2.style.textAlign = "center";
+      }
+      const last = headersArray.slice(-1);
+      const cell = head.insertCell(-1);
+      cell.innerHTML = last;
+      cell.style.textAlign = "right";
+      cell.style.paddingRight = "1rem";
+      const amountOfColumns = tblHead.querySelectorAll("td").length;
+      const lines = [];
+      const filterLines = content.querySelectorAll("p");
+      for (let i = 0; i < filterLines.length; i++) {
+        if (!filterLines[i].innerHTML.includes("<strong>")) {
+          lines.push(filterLines[i]);
+        }
+      }
+      const linesArray = [];
+      for (let i = 0; i < lines.length; i++) {
+        const row = tblBody.insertRow();
+        const line = lines[i].textContent;
+        if (line[0] === "*") {
+          linesArray.push(lines[i]);
+        } else {
+          const ingrArray = Array.from(line.split("|"));
+          const first2 = ingrArray[0];
+          const firstRow = row.insertCell(0);
+          firstRow.innerHTML = first2;
+          firstRow.style.paddingRight = ".25rem";
+          const others = ingrArray.slice(1);
+          for (let i2 = 0; i2 < others.length; i2++) {
+            const otherRows = row.insertCell();
+            otherRows.innerHTML = others[i2];
+            otherRows.style.paddingLeft = ".25rem";
+            otherRows.style.paddingRight = ".25rem";
+            if (amountOfColumns === 2) {
+              otherRows.style.textAlign = "right";
+              otherRows.style.paddingRight = "1rem";
+            } else if (others[i2].includes("%")) {
+              otherRows.style.textAlign = "right";
+              otherRows.style.paddingRight = "1rem";
+            } else {
+              otherRows.style.textAlign = "center";
+            }
+          }
+        }
+        const tds = document.querySelectorAll("td");
+        for (let i2 = 0; i2 < tds.length; i2++) {
+          const tdsText = tds[i2].textContent;
+          if (tdsText[0] === "-") {
+            tds[i2].classList.add("padThisCell");
+          }
+        }
+        if (lines[i].textContent?.includes("^")) {
+          exponent2();
+        }
+        if (lines[i].innerHTML.includes("<em>")) {
+          const italics = lines[i].querySelector("em").textContent;
+          const toBeItalics = tblBody.querySelectorAll("td");
+          for (let i2 = 0; i2 < toBeItalics.length; i2++) {
+            const it = toBeItalics[i2].innerHTML;
+            if (it.includes(italics)) {
+              toBeItalics[i2].innerHTML = toBeItalics[i2].innerHTML.replace(
+                italics,
+                `<em>${italics}</em>`
+              );
+            }
+          }
+        }
+        content.style.display = "none";
+      }
+      if (linesArray.length > 0) {
+        for (let i = 0; i < linesArray.length; i++) {
+          const line = linesArray[i].textContent;
+          const row = tblBody.insertRow();
+          if (line[1] === "%") {
+            const cell2 = row.insertCell(0);
+            cell2.innerHTML = line;
+            cell2.colSpan = 100;
+          } else {
+            const starRemoved = line.slice(1);
+            const cell2 = row.insertCell(0);
+            cell2.innerHTML = starRemoved;
+            cell2.colSpan = 100;
+          }
+        }
+        const firstLine = linesArray[0].textContent.slice(1);
+        const trs = tblBody.querySelectorAll("tr");
+        for (let i = 0; i < trs.length; i++) {
+          if (trs[i].innerHTML.includes(firstLine)) {
+            trs[i].classList.add("table_first-footnote");
+          }
+        }
+      }
+    }
+  }
+
+  // src/utils/splideImagesOrder.ts
+  function splideImagesOrder() {
+    const mainImage = document.querySelector("[gallery='main-image']");
+    const noImage = document.querySelector("[gallery='no-image']");
+    const list = document.querySelector("[gallery='list']");
+    const infoCard = document.querySelector("[gallery='info-card']");
+    const videoCard = document.querySelector("[gallery='video-card']");
+    const listWrp = document.querySelector("[gallery='list-wrp']");
+    const galleryDesktop = document.querySelector("[gallery='desktop']");
+    let infoCardPosition;
+    let videoCardPosition;
+    if (noImage?.classList.contains("w-condition-invisible")) {
+      noImage.remove();
+    }
+    if (infoCard.getAttribute("gallery-location")) {
+      infoCardPosition = Number(infoCard.getAttribute("gallery-location")) - 1;
+    }
+    if (videoCard.getAttribute("gallery-location")) {
+      videoCardPosition = Number(videoCard.getAttribute("gallery-location")) - 1;
+    }
+    if (list.childElementCount === 0) {
+      listWrp.remove();
+      if (!infoCard.getAttribute("gallery-location")) {
+        infoCard.insertAdjacentElement("afterend", mainImage);
+      } else {
+        list.insertBefore(infoCard, list.children[infoCardPosition]);
+      }
+    } else if (list.childElementCount === 1) {
+      if (!videoCard) {
+        if (!infoCard.getAttribute("gallery-location")) {
+          galleryDesktop.insertBefore(mainImage, list.children[1]);
+        } else {
+          list.insertBefore(infoCard, list.children[infoCardPosition]);
+        }
+      } else if (videoCard) {
+        galleryDesktop.insertBefore(videoCard, galleryDesktop.children[videoCardPosition]);
+        galleryDesktop.insertBefore(infoCard, galleryDesktop.children[infoCardPosition]);
+      }
+    } else if (list.childElementCount > 1) {
+      list.insertBefore(mainImage, list.children[1]);
+      if (!infoCard.getAttribute("gallery-location")) {
+        list.insertBefore(infoCard, list.children[3]);
+      } else {
+        list.insertBefore(infoCard, list.children[infoCardPosition]);
+        list.insertBefore(mainImage, list.children[1]);
+      }
+    }
+  }
+
+  // src/index.ts
+  window.Webflow ||= [];
+  window.Webflow.push(() => {
+    if (document.querySelector("[swiper='index-hero']")) {
+    } else {
+      addStamps();
+      splideImagesOrder();
+      htmlTable();
+      allergens();
+    }
+  });
+})();
+//# sourceMappingURL=index.js.map
