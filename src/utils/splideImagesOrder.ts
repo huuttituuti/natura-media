@@ -15,6 +15,10 @@ export function splideImagesOrder() {
   if (noImage?.classList.contains('w-condition-invisible')) {
     noImage.remove();
   }
+  /* Remove video card if invisible so no ghost slides on mobile */
+  if (videoCard?.classList.contains('w-condition-invisible')) {
+    videoCard.remove();
+  }
 
   // If infocard has position set in it's attribute, convert to number
   if (infoCard.getAttribute('gallery-location')) {
