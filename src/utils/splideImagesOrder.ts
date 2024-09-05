@@ -52,8 +52,9 @@ export function splideImagesOrder() {
       } else {
         list.insertBefore(infoCard, list.children[infoCardPosition]);
       }
-    } else if (videoCard) {
-      // If there's only 1 image in multigallery and there IS videocard
+    } else if (videoCard && window.innerWidth > 991) {
+      /* If there's only 1 image in multigallery, there IS videocard
+      and the it's not on mobile layouts */
       galleryDesktop.insertBefore(videoCard, galleryDesktop.children[videoCardPosition]);
       galleryDesktop.insertBefore(infoCard, galleryDesktop.children[infoCardPosition]);
     }
