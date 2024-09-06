@@ -39,13 +39,6 @@ export function splideImagesOrder() {
       list.insertBefore(infoCard, list.children[infoCardPosition]);
     }
   } else if (list.childElementCount === 1) {
-    // If the 1 is invisible
-    /* Don't remember what this was for?
-    But if the gallery had only 1 image, it would disappear
-    so I hid this section of code. 25/10/23*/
-    /*if (list?.querySelectorAll('invisible')) {
-      listWrp.remove();
-    }*/
     // If there's only 1 image in multigallery and there IS NO videocard
     if (!videoCard) {
       if (!infoCard.getAttribute('gallery-location')) {
