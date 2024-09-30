@@ -1,8 +1,16 @@
 export function allergens() {
-  const allergensH = document.querySelector("[allergens='header']");
+  /* Remove the vegan stamp from allergen list,
+  since there the big vegan stamp on left exists already */
+  const removeVegan = document.querySelector("[allergen-name='Vegaaninen']");
+  if (removeVegan) {
+    removeVegan.remove();
+  }
+
+  // No need anymore for it's icon not text based vvvv
+  /*const allergensH = document.querySelector("[allergens='header']");
   const allergens = Array.from(document.querySelectorAll("[allergens='item']"));
   const finalArray = [];
-  let string = [];
+  const string = [];
 
   const array = [];
   for (let i = 0; i < allergens.length; i++) {
@@ -47,5 +55,5 @@ export function allergens() {
     allergensH.textContent = 'Ei sisällä ' + string;
   }
   // Remove original collection list
-  document.querySelector("[allergens='list']")?.remove();
+  document.querySelector("[allergens='list']")?.remove();*/
 }

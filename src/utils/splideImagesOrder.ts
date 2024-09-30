@@ -21,8 +21,13 @@ export function splideImagesOrder() {
     infoCardPosition = Number(infoCard.getAttribute('gallery-location')) - 1;
   }
 
-  // If videocard exists and has position set in it's attribute, convert to number
+  // If videocard exists
   if (videoCard) {
+    // move inside the list div along with the gallery images if there's more than 1 gallery image
+    if (list.childElementCount > 1) {
+      list?.appendChild(videoCard);
+    }
+    // and if it has position set as attribute, convert to number
     if (videoCard.getAttribute('gallery-location')) {
       videoCardPosition = Number(videoCard.getAttribute('gallery-location')) - 1;
     }
@@ -61,6 +66,7 @@ export function splideImagesOrder() {
       list.insertBefore(infoCard, list.children[3]);
     } else {
       list.insertBefore(infoCard, list.children[infoCardPosition]);
+      list.insertBefore(videoCard, list.children[videoCardPosition]);
       list.insertBefore(mainImage, list.children[1]);
     }
   }
