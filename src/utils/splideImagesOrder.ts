@@ -24,7 +24,9 @@ export function splideImagesOrder() {
   // If videocard exists
   if (videoCard) {
     // move inside the list div along with the gallery images if there's more than 1 gallery image
-    if (list.childElementCount > 1) {
+    /* --- VIDEOCARD ADDITON. Had to add window.innerWidth bc otherwise splide slide last/prev
+    would disappear and only reappear when being active --- */
+    if (list.childElementCount > 1 && window.innerWidth > 991) {
       list?.appendChild(videoCard);
     }
     // and if it has position set as attribute, convert to number
@@ -53,8 +55,8 @@ export function splideImagesOrder() {
         list.insertBefore(infoCard, list.children[infoCardPosition]);
       }
     } else if (videoCard && window.innerWidth > 991) {
-      /* If there's only 1 image in multigallery, there IS videocard
-      and the it's not on mobile layouts */
+      // If there's only 1 image in multigallery, there IS videocard
+      // and the it's not on mobile layouts
       galleryDesktop.insertBefore(videoCard, galleryDesktop.children[videoCardPosition]);
       galleryDesktop.insertBefore(infoCard, galleryDesktop.children[infoCardPosition]);
     }
@@ -64,8 +66,10 @@ export function splideImagesOrder() {
     if (!infoCard.getAttribute('gallery-location')) {
       // and infocard fourth
       list.insertBefore(infoCard, list.children[3]);
-    } else {
+    } else if (window.innerWidth > 991) {
       list.insertBefore(infoCard, list.children[infoCardPosition]);
+      /* --- VIDEOCARD ADDITON. Had to add window.innerWidth bc otherwise splide slide last/prev
+    would disappear and only reappear when being active --- */
       list.insertBefore(videoCard, list.children[videoCardPosition]);
       list.insertBefore(mainImage, list.children[1]);
     }
