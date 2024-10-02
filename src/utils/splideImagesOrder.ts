@@ -70,7 +70,9 @@ export function splideImagesOrder() {
       list.insertBefore(infoCard, list.children[infoCardPosition]);
       /* --- VIDEOCARD ADDITON. Had to add window.innerWidth bc otherwise splide slide last/prev
     would disappear and only reappear when being active --- */
-      list.insertBefore(videoCard, list.children[videoCardPosition]);
+      if (videoCard) {
+        list.insertBefore(videoCard, list.children[videoCardPosition]);
+      }
       list.insertBefore(mainImage, list.children[1]);
     }
   }
